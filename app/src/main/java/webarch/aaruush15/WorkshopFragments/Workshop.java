@@ -7,6 +7,7 @@ public class Workshop {
 
     public String title;
     public Integer image;
+    public Integer imageLarge;
     public String description;
     public String date;
     public String price;

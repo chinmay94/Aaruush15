@@ -4,7 +4,6 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,7 +18,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
-public class FlexibleSpaceWithImageScrollViewActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
+public class WorkshopDetails extends AppCompatActivity implements ObservableScrollViewCallbacks {
 
     private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
@@ -49,31 +48,34 @@ public class FlexibleSpaceWithImageScrollViewActivity extends AppCompatActivity 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flexiblespacewithimagescrollview);
+        setContentView(R.layout.activity_workshopdetails);
         Bundle extras=getIntent().getExtras();
-        int i=extras.getInt("position");
-        String[] titles={"Eye Robotics","Surveilance Quadcopter","Tall Building Design","Vehicle Over Hauling","Hacktrack","Digipreneur","Big Data Analysis"};
-        Integer[] images={R.drawable.eyerobotics,R.drawable.surveillancequadcopter,R.drawable.tallbuildingdesign,R.drawable.vehicleoverhauling,R.drawable.hacktrack,R.drawable.digipreneur,R.drawable.bigdataanalysis};
+        //int i=extras.getInt("position");
+        //Workshop workshop= (Workshop) extras.get("data");
+        //String[] titles={"Eye Robotics","Surveilance Quadcopter","Tall Building Design","Vehicle Over Hauling","Hacktrack","Digipreneur","Big Data Analysis"};
+        //Integer[] images={R.drawable.eyerobotics,R.drawable.surveillancequadcopter,R.drawable.tallbuildingdesign,R.drawable.vehicleoverhauling,R.drawable.hacktrack,R.drawable.digipreneur,R.drawable.bigdataanalysis};
 
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = getActionBarSize();
 
         mImageView = (ImageView)findViewById(R.id.image);
-        mImageView.setImageResource(images[i]);
+        //mImageView.setImageResource(images[i]);
+        mImageView.setImageResource(extras.getInt("image"));
         //mImageView = findViewById(R.id.image);
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
         mTitleView = (TextView) findViewById(R.id.title);
         //mTitleView.setText(getTitle());
-        mTitleView.setText(titles[i]);
+        //mTitleView.setText(titles[i]);
+        mTitleView.setText(extras.getString("title"));
         setTitle(null);
         mFab = findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FlexibleSpaceWithImageScrollViewActivity.this, "FAB is clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WorkshopDetails.this, "FAB is clicked", Toast.LENGTH_SHORT).show();
             }
         });
         mFabMargin = getResources().getDimensionPixelSize(R.dimen.margin_standard);
