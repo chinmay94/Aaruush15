@@ -50,25 +50,19 @@ public class WorkshopDetails extends AppCompatActivity implements ObservableScro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workshopdetails);
         Bundle extras=getIntent().getExtras();
-        //int i=extras.getInt("position");
-        //Workshop workshop= (Workshop) extras.get("data");
-        //String[] titles={"Eye Robotics","Surveilance Quadcopter","Tall Building Design","Vehicle Over Hauling","Hacktrack","Digipreneur","Big Data Analysis"};
-        //Integer[] images={R.drawable.eyerobotics,R.drawable.surveillancequadcopter,R.drawable.tallbuildingdesign,R.drawable.vehicleoverhauling,R.drawable.hacktrack,R.drawable.digipreneur,R.drawable.bigdataanalysis};
 
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = getActionBarSize();
 
         mImageView = (ImageView)findViewById(R.id.image);
-        //mImageView.setImageResource(images[i]);
-        mImageView.setImageResource(extras.getInt("image"));
+        mImageView.setImageResource(extras.getInt("imageLarge"));
         //mImageView = findViewById(R.id.image);
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
         mTitleView = (TextView) findViewById(R.id.title);
         //mTitleView.setText(getTitle());
-        //mTitleView.setText(titles[i]);
         mTitleView.setText(extras.getString("title"));
         setTitle(null);
         mFab = findViewById(R.id.fab);

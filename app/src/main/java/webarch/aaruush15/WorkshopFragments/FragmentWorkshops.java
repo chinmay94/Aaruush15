@@ -37,8 +37,8 @@ public class FragmentWorkshops extends Fragment {
                 Intent intent=new Intent(getActivity(),WorkshopDetails.class);
                 //intent.putExtra("Test_Image",(String)view.getTag());
                 //intent.putExtra("position",i);
-                intent.putExtra("image",workshopList.get(i).imageLarge);
-                intent.putExtra("title",workshopList.get(i).title);
+                Bundle bundle=workshopList.get(i).getAsBundle();
+                intent.putExtras(bundle);
                 //ActivityCompat.startActivity(getActivity(),intent,options.toBundle());
                 startActivity(intent);
             }
