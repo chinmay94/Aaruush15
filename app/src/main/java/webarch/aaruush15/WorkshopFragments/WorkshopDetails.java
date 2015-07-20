@@ -1,4 +1,4 @@
-package webarch.aaruush15;
+package webarch.aaruush15.WorkshopFragments;
 
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -17,6 +17,8 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+
+import webarch.aaruush15.R;
 
 public class WorkshopDetails extends AppCompatActivity implements ObservableScrollViewCallbacks {
 

@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WorkshopDetails"
+            android:name=".WorkshopFragments.WorkshopDetails"
             android:theme="@style/AppTheme.Toolbar">
         </activity>
     </application>

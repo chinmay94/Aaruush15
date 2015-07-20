@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import webarch.aaruush15.WorkshopDetails;
 import webarch.aaruush15.R;
 
 /**
