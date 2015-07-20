@@ -11,8 +11,7 @@ public class WorkshopHandler {
 
     int number=7;
     String[] titles={"Eye Robotics","Surveilance Quadcopter","Tall Building Design","Vehicle Over Hauling","Hacktrack","Digipreneur","Big Data Analysis"};
-    //Integer[] images={R.drawable.eyerobotics,R.drawable.surveillancequadcopter,R.drawable.tallbuildingdesign,R.drawable.vehicleoverhauling,R.drawable.hacktrack,R.drawable.digipreneur,R.drawable.bigdataanalysis};
-    Integer[] images={R.mipmap.ic_launcher};
+    Integer[] images={R.drawable.eyeroboticssmall,R.drawable.surveillancequadcoptersmall,R.drawable.tallbuildingdesignsmall,R.drawable.vehicleoverhaulingsmall,R.drawable.hacktracksmall,R.drawable.digipreneursmall,R.drawable.bigdataanalysissmall};
     String[] descriptions={"The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog."};
     String[] dates={"6-7 September"};
     String[] prices={"Rs. 1100/-"};
@@ -26,8 +25,7 @@ public class WorkshopHandler {
         for(int i=0;i<number;i++){
             Workshop obj=new Workshop();
             obj.title=titles[i];
-            //obj.image=images[i];
-            obj.image=images[0];
+            obj.image=images[i];
             obj.description=descriptions[0];
             obj.date=dates[0];
             obj.price=prices[0];

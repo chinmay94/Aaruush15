@@ -4,9 +4,11 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,8 @@ public class FlexibleSpaceWithImageScrollViewActivity extends AppCompatActivity 
 
     private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
-    private View mImageView;
+    private ImageView mImageView;
+    //private View mImageView;
     private View mOverlayView;
     private ObservableScrollView mScrollView;
     private TextView mTitleView;
@@ -47,17 +50,24 @@ public class FlexibleSpaceWithImageScrollViewActivity extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flexiblespacewithimagescrollview);
+        Bundle extras=getIntent().getExtras();
+        int i=extras.getInt("position");
+        String[] titles={"Eye Robotics","Surveilance Quadcopter","Tall Building Design","Vehicle Over Hauling","Hacktrack","Digipreneur","Big Data Analysis"};
+        Integer[] images={R.drawable.eyerobotics,R.drawable.surveillancequadcopter,R.drawable.tallbuildingdesign,R.drawable.vehicleoverhauling,R.drawable.hacktrack,R.drawable.digipreneur,R.drawable.bigdataanalysis};
 
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = getActionBarSize();
 
-        mImageView = findViewById(R.id.image);
+        mImageView = (ImageView)findViewById(R.id.image);
+        mImageView.setImageResource(images[i]);
+        //mImageView = findViewById(R.id.image);
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
         mTitleView = (TextView) findViewById(R.id.title);
-        mTitleView.setText(getTitle());
+        //mTitleView.setText(getTitle());
+        mTitleView.setText(titles[i]);
         setTitle(null);
         mFab = findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {

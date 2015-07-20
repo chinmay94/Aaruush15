@@ -35,11 +35,13 @@ public class FragmentWorkshops extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.image), "Test_Image");
+
+                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.image), "Test_Image");
                 Intent intent=new Intent(getActivity(),FlexibleSpaceWithImageScrollViewActivity.class);
-                intent.putExtra("Test_Image",(String)view.getTag());
-                ActivityCompat.startActivity(getActivity(),intent,options.toBundle());
-                //Toast.makeText(getActivity(),"hello",Toast.LENGTH_SHORT).show();
+                //intent.putExtra("Test_Image",(String)view.getTag());
+                intent.putExtra("position",i);
+                //ActivityCompat.startActivity(getActivity(),intent,options.toBundle());
+                startActivity(intent);
             }
         });
         return rootview;

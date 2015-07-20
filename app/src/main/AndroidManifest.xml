@@ -17,7 +17,6 @@
         </activity>
         <activity
             android:name=".FlexibleSpaceWithImageScrollViewActivity"
-            android:label="test"
             android:theme="@style/AppTheme.Toolbar">
         </activity>
     </application>
