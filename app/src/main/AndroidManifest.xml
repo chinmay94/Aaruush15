@@ -19,6 +19,10 @@
             android:name=".WorkshopFragments.WorkshopDetails"
             android:theme="@style/AppTheme.Toolbar">
         </activity>
+        <activity
+            android:name=".FlexibleSpaceWithImageListViewActivity"
+            android:theme="@style/AppTheme.Toolbar">
+        </activity>
     </application>
 
 </manifest>
