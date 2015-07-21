@@ -11,6 +11,7 @@
     <item name="darkgrey" type="color">#FF212121</item>
     <item name="grey" type="color">#FF727272</item>
     <item name="lightgrey" type="color">#FFB6B6B6</item>
+    <item name="lightergrey" type="color">#D0D0D0</item>
 
     <item name="Primary" type="color">@color/red</item>
     <item name="PrimaryDark" type="color">@color/darkred</item>
@@ -18,6 +19,6 @@
     <item name="Text" type="color">@color/white</item>
     <item name="PrimaryText" type="color">@color/darkgrey</item>
     <item name="SecondaryText" type="color">@color/grey</item>
-    <item name="Divider" type="color">@color/lightgrey</item>
+    <item name="Divider" type="color">@color/lightergrey</item>
     <item name="Accent" type="color">@color/amber</item>
 </resources>
