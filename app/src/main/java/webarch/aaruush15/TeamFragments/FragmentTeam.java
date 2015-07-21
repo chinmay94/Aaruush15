@@ -90,7 +90,8 @@ public class FragmentTeam extends Fragment implements MaterialTabListener
                 case 0:
                     return new FragmentTeamPatrons();
                 case 1:
-                    return new FragmentTeamCore();
+                    return new FriendsActivity();
+                    //return new FragmentTeamCore();
             }
             return new FragmentTeamPatrons();
         }

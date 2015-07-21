@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import webarch.aaruush15.TeamFragments.FriendsActivity;
 import webarch.aaruush15.ui_fragments.FragmentAbout;
 import webarch.aaruush15.ui_fragments.FragmentCredits;
 import webarch.aaruush15.ui_fragments.FragmentDomains;
@@ -47,7 +48,8 @@ public class MainActivity extends MaterialNavigationDrawer
         this.addSection(newSectionWithRealColor("Workshops", R.drawable.drawer_workshops, new FragmentWorkshops()));
         this.addSection(newSectionWithRealColor("Highlights", R.drawable.drawer_highlights, new FragmentHighlights()));
         this.addSection(newSectionWithRealColor("Sponsors", R.drawable.drawer_sponsors, new FragmentSponsors()));
-        this.addSection(newSectionWithRealColor("Team", R.drawable.drawer_team, new FragmentTeam()));
+        //this.addSection(newSectionWithRealColor("Team", R.drawable.drawer_team, new FragmentTeam()));
+        this.addSection(newSectionWithRealColor("Team", R.drawable.drawer_team, new FriendsActivity()));
         this.addBottomSection(newSectionWithRealColor("Credits", R.drawable.drawer_credits, new FragmentCredits()));
 
         this.allowArrowAnimation();
