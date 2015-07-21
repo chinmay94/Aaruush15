@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/Accent</item>
         <item name="drawerType">@integer/DRAWERTYPE_CUSTOM</item>
         <item name="android:textColor">@color/white</item>
+        <item name="learningPattern">false</item>
     </style>
 
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.NoActionBar">

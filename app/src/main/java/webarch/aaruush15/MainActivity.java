@@ -52,11 +52,4 @@ public class MainActivity extends MaterialNavigationDrawer
 
         this.allowArrowAnimation();
     }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        this.closeDrawer();
-    }
 }
