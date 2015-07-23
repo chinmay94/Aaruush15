@@ -1,135 +1,161 @@
 package webarch.aaruush15.TeamFragments;
 
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabHost;
-import it.neokree.materialtabs.MaterialTabListener;
-import webarch.aaruush15.HomeFragments.FragmentHomeEvents;
-import webarch.aaruush15.HomeFragments.FragmentHomeHighlights;
-import webarch.aaruush15.HomeFragments.FragmentHomeWorkshops;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import webarch.aaruush15.R;
+import webarch.aaruush15.ViewFlipperLibraryFiles.BaseFlipAdapter;
+import webarch.aaruush15.ViewFlipperLibraryFiles.FlipSettings;
 
 /**
- * Created by Chinmay on 07-Jul-15.
+ * @author Yalantis
  */
-public class FragmentTeam extends Fragment implements MaterialTabListener
-{
-    MaterialTabHost tabHost;
-    ViewPager pager;
-    ViewPagerAdapter adapter;
+public class FragmentTeam extends Fragment {
+
+    final Context context = getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootview=inflater.inflate(R.layout.tab_activity_text, container, false);
-        setHasOptionsMenu(true);
-
-        tabHost = (MaterialTabHost) rootview.findViewById(R.id.tabHost);
-        tabHost.setPrimaryColor(this.getActivity().getResources().getColor(R.color.Primary));
-        tabHost.setAccentColor(this.getActivity().getResources().getColor(R.color.PrimaryLight));
-        pager = (ViewPager) rootview.findViewById(R.id.pager);
-
-        // init view pager
-        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        new SetAdapterTask().execute();
-        pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
-        {
+        View rootview=inflater.inflate(R.layout.activity_friends, container, false);
+        final ListView patrons = (ListView) rootview.findViewById(R.id.patrons);
+        FlipSettings settings = new FlipSettings.Builder().defaultPage(1).build();
+        patrons.setAdapter(new MemberModelAdapter(getActivity(), Utils.patrons, settings));
+        patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onPageSelected(int position)
-            {
-                tabHost.setSelectedNavigationItem(position);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(),"Clicked on "+(Utils.patrons.get(i).getNickname()),Toast.LENGTH_SHORT).show();
             }
         });
+        /*patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
 
-        for (int i = 0; i < adapter.getCount(); i++)
-        {
-            tabHost.addTab(tabHost.newTab().setText(adapter.getPageTitle(i)).setTabListener(this));
-        }
+                // set title
+                alertDialogBuilder.setTitle("Hello");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Choose your option ")
+                        .setCancelable(false)
+                        .setPositiveButton("Facebook", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close
+                                // current activity
+                                disp();
+                            }
+                            public void disp() {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                                        "https://www.facebook.com/chinmay.kapoor.9"));
+                                startActivity(browserIntent);
+                            }
+                        })
+                        .setNegativeButton("Call", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                String x = "tel:9314871195";
+                                Intent calli = new Intent(Intent.ACTION_DIAL);
+                                calli.setData((Uri.parse(x)));
+                                startActivity(calli);
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.setCancelable(true);
+            }
+        });*/
         return rootview;
     }
 
-    @Override
-    public void onTabSelected(MaterialTab tab)
+    class MemberModelAdapter extends BaseFlipAdapter<MemberModel>
     {
-        pager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabReselected(MaterialTab tab)
-    {
-    }
-
-    @Override
-    public void onTabUnselected(MaterialTab tab)
-    {
-    }
-
-    private class ViewPagerAdapter extends FragmentStatePagerAdapter
-    {
-        public ViewPagerAdapter(FragmentManager fm)
+        private final int PAGES = 3;
+        private int[] IDS_INTEREST = {R.id.interest_1,R.id.interest_2};
+        public MemberModelAdapter(Context context, List<MemberModel> items, FlipSettings settings)
         {
-            super(fm);
+            super(context, items, settings);
         }
 
-        public Fragment getItem(int position)
+        @Override
+        public View getPage(int position, View convertView, ViewGroup parent, MemberModel model1, MemberModel model2)
         {
+            final MembersHolder holder;
+            if (convertView == null)
+            {
+                holder = new MembersHolder();
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.team_item_normal, parent, false);
+                holder.leftAvatar = (ImageView) convertView.findViewById(R.id.first);
+                holder.rightAvatar = (ImageView) convertView.findViewById(R.id.second);
+                holder.infoPage = getActivity().getLayoutInflater().inflate(R.layout.team_item_flipped, parent, false);
+                holder.nickName = (TextView) holder.infoPage.findViewById(R.id.nickname);
+                for (int id : IDS_INTEREST)
+                    holder.interests.add((TextView) holder.infoPage.findViewById(id));
+                convertView.setTag(holder);
+            }
+            else
+            {
+                holder = (MembersHolder) convertView.getTag();
+            }
+
             switch (position)
             {
-                case 0:
-                    return new FragmentTeamPatrons();
                 case 1:
-                    return new FriendsActivity();
-                    //return new FragmentTeamCore();
+                    holder.leftAvatar.setImageResource(model1.getAvatar());
+                    if (model2 != null)
+                        holder.rightAvatar.setImageResource(model2.getAvatar());
+                    break;
+                default:
+                    fillHolder(holder, position == 0 ? model1 : model2);
+                    holder.infoPage.setTag(holder);
+                    return holder.infoPage;
             }
-            return new FragmentTeamPatrons();
+            return convertView;
         }
 
         @Override
-        public int getCount()
+        public int getPagesCount()
         {
-            return 2;
+            return PAGES;
         }
 
-        @Override
-        public CharSequence getPageTitle(int position)
+        private void fillHolder(MembersHolder holder, MemberModel model)
         {
-            switch (position)
-            {
-                case 0:
-                    return "Patrons";
-                case 1:
-                    return "Core Team";
-            }
-            return "Error";
+            if (model == null)
+                return;
+            Iterator<TextView> iViews = holder.interests.iterator();
+            Iterator<String> iInterests = model.getInterests().iterator();
+            while (iViews.hasNext() && iInterests.hasNext())
+                iViews.next().setText(iInterests.next());
+            holder.infoPage.setBackgroundColor(getResources().getColor(model.getBackground()));
+            holder.nickName.setText(model.getNickname());
         }
 
-        @Override
-        public void restoreState(Parcelable state, ClassLoader loader)
+        class MembersHolder
         {
-            // do nothing here! no call to super.restoreState(state, loader);
-        }
-    }
-
-    private class SetAdapterTask extends AsyncTask<Void, Void, Void> {
-        protected Void doInBackground(Void... params) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            if(adapter != null) pager.setAdapter(adapter);
+            ImageView leftAvatar;
+            ImageView rightAvatar;
+            View infoPage;
+            List<TextView> interests = new ArrayList<>();
+            TextView nickName;
         }
     }
 }

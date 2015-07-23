@@ -1,37 +1,35 @@
 package webarch.aaruush15.ui_fragments;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import webarch.aaruush15.R;
 
 
-public class ImageAdapterDomains extends BaseAdapter
+public class DomainsAdapter extends BaseAdapter
 {
-    String[] result;
+    String[] domain_names;
     Context context;
-    int[] imageId;
+    int[] domain_images;
     private static LayoutInflater inflater = null;
 
-    public ImageAdapterDomains(Context context, String[] prgmNameList, int[] prgmImages)
+    public DomainsAdapter(Context context, String[] prgmNameList, int[] prgmImages)
     {
-        result = prgmNameList;
+        domain_names = prgmNameList;
         this.context = context;
-        imageId = prgmImages;
+        domain_images = prgmImages;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount()
     {
-        return result.length;
+        return domain_names.length;
     }
 
     @Override
@@ -50,7 +48,6 @@ public class ImageAdapterDomains extends BaseAdapter
     public class Holder {
         TextView tv;
         ImageView img;
-        LinearLayout ll;
     }
 
     @Override
@@ -58,15 +55,13 @@ public class ImageAdapterDomains extends BaseAdapter
     {
         Holder holder = new Holder();
         View rowView;
+        rowView = inflater.inflate(R.layout.domains_grid_item, null);
 
-        //rowView = inflater.inflate(R.layout.domain_grid_layout, null);
-        rowView = inflater.inflate(R.layout.testitem, null);
-        /*holder.tv = (TextView) rowView.findViewById(R.id.textView1);
-        holder.ll = (LinearLayout) rowView.findViewById(R.id.layout);
+        holder.tv = (TextView) rowView.findViewById(R.id.domain_name);
+        holder.img= (ImageView) rowView.findViewById(R.id.domain_image);
 
-        holder.ll.setBackgroundResource(imageId[position]);
-        holder.tv.setText(result[position]);*/
-
+        holder.tv.setText(domain_names[position]);
+        holder.img.setImageResource(domain_images[position]);
         return rowView;
     }
 }
