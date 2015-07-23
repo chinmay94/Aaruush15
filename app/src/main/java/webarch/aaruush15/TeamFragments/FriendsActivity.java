@@ -16,10 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import webarch.aaruush15.R;
-import webarch.aaruush15.Utils;
 import webarch.aaruush15.ViewFlipperLibraryFiles.BaseFlipAdapter;
 import webarch.aaruush15.ViewFlipperLibraryFiles.FlipSettings;
-import webarch.aaruush15.model.Friend;
 
 /**
  * @author Yalantis
@@ -32,10 +30,12 @@ public class FriendsActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View rootview=inflater.inflate(R.layout.activity_friends, container, false);
-        final ListView friends = (ListView) rootview.findViewById(R.id.friends);
+        final ListView patrons = (ListView) rootview.findViewById(R.id.patrons);
+        //final ListView core = (ListView) rootview.findViewById(R.id.core);
         FlipSettings settings = new FlipSettings.Builder().defaultPage(1).build();
-        friends.setAdapter(new FriendsAdapter(getActivity(), Utils.friends, settings));
-        /*friends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        patrons.setAdapter(new MemberModelAdapter(getActivity(), Utils.patrons, settings));
+        //core.setAdapter(new MemberModelAdapter(getActivity(), Utils.patrons, settings));
+        /*patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -80,43 +80,45 @@ public class FriendsActivity extends Fragment {
         return rootview;
     }
 
-    class FriendsAdapter extends BaseFlipAdapter<Friend> {
+    class MemberModelAdapter extends BaseFlipAdapter<MemberModel>
+    {
         private final int PAGES = 3;
-        private int[] IDS_INTEREST = {R.id.interest_1};
-
-        public FriendsAdapter(Context context, List<Friend> items, FlipSettings settings) {
+        private int[] IDS_INTEREST = {R.id.interest_1,R.id.interest_2};
+        public MemberModelAdapter(Context context, List<MemberModel> items, FlipSettings settings)
+        {
             super(context, items, settings);
         }
 
         @Override
-        public View getPage(int position, View convertView, ViewGroup parent, Friend friend1, Friend friend2) {
-            final FriendsHolder holder;
-
-            if (convertView == null) {
-                holder = new FriendsHolder();
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.friends_merge_page, parent, false);
+        public View getPage(int position, View convertView, ViewGroup parent, MemberModel model1, MemberModel model2)
+        {
+            final MembersHolder holder;
+            if (convertView == null)
+            {
+                holder = new MembersHolder();
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.team_item_normal, parent, false);
                 holder.leftAvatar = (ImageView) convertView.findViewById(R.id.first);
                 holder.rightAvatar = (ImageView) convertView.findViewById(R.id.second);
-                holder.infoPage = getActivity().getLayoutInflater().inflate(R.layout.friends_info, parent, false);
+                holder.infoPage = getActivity().getLayoutInflater().inflate(R.layout.team_item_flipped, parent, false);
                 holder.nickName = (TextView) holder.infoPage.findViewById(R.id.nickname);
-
                 for (int id : IDS_INTEREST)
                     holder.interests.add((TextView) holder.infoPage.findViewById(id));
-
                 convertView.setTag(holder);
-            } else {
-                holder = (FriendsHolder) convertView.getTag();
+            }
+            else
+            {
+                holder = (MembersHolder) convertView.getTag();
             }
 
-            switch (position) {
-                // Merged page with 2 friends
+            switch (position)
+            {
                 case 1:
-                    holder.leftAvatar.setImageResource(friend1.getAvatar());
-                    if (friend2 != null)
-                        holder.rightAvatar.setImageResource(friend2.getAvatar());
+                    holder.leftAvatar.setImageResource(model1.getAvatar());
+                    if (model2 != null)
+                        holder.rightAvatar.setImageResource(model2.getAvatar());
                     break;
                 default:
-                    fillHolder(holder, position == 0 ? friend1 : friend2);
+                    fillHolder(holder, position == 0 ? model1 : model2);
                     holder.infoPage.setTag(holder);
                     return holder.infoPage;
             }
@@ -124,28 +126,31 @@ public class FriendsActivity extends Fragment {
         }
 
         @Override
-        public int getPagesCount() {
+        public int getPagesCount()
+        {
             return PAGES;
         }
 
-        private void fillHolder(FriendsHolder holder, Friend friend) {
-            if (friend == null)
+        private void fillHolder(MembersHolder holder, MemberModel model)
+        {
+            if (model == null)
                 return;
             Iterator<TextView> iViews = holder.interests.iterator();
-            Iterator<String> iInterests = friend.getInterests().iterator();
+            Iterator<String> iInterests = model.getInterests().iterator();
             while (iViews.hasNext() && iInterests.hasNext())
                 iViews.next().setText(iInterests.next());
-            holder.infoPage.setBackgroundColor(getResources().getColor(friend.getBackground()));
-            holder.nickName.setText(friend.getNickname());
+            holder.infoPage.setBackgroundColor(getResources().getColor(model.getBackground()));
+            holder.nickName.setText(model.getNickname());
         }
 
-        class FriendsHolder {
+        class MembersHolder
+        {
             ImageView leftAvatar;
             ImageView rightAvatar;
             View infoPage;
-
             List<TextView> interests = new ArrayList<>();
             TextView nickName;
+            TextView team;
         }
     }
 }

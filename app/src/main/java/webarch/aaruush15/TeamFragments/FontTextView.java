@@ -1,4 +1,4 @@
-package webarch.aaruush15.views;
+package webarch.aaruush15.TeamFragments;
 
 import android.content.Context;
 import android.graphics.Typeface;

@@ -24,21 +24,22 @@ public class FragmentDomains extends Fragment {
     GridView gv;
     Context context;
 
-    public static String[] Member = {"Sumit", "Sumit", "Sumit", "Sumit", "Sumit", "Sumit", "Sumit", "Sumit", "Sumit"};
-    public static int[] MemberImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, };
+    public static String[] Member = {"MAGEFFICIE", "VIMANAZ", "MACHINATIONS", "ELECTRIZITE", "YUDDHAME", "FUNDAZ"};
+    public static int[] MemberImages = {R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz};
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View rootview=inflater.inflate(R.layout.fragment_domains,container,false);
         setHasOptionsMenu(true);
-
         gv = (GridView) rootview.findViewById(R.id.gridView1);
         gv.setAdapter(new ImageAdapterDomains(getActivity(), Member, MemberImages));
         return rootview;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
         inflater.inflate(R.menu.menu_main,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
