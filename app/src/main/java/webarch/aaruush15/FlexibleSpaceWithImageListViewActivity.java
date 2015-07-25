@@ -40,6 +40,9 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 
 import java.util.ArrayList;
 
+import webarch.aaruush15.WorkshopFragments.Workshop;
+import webarch.aaruush15.WorkshopFragments.WorkshopHandler;
+
 public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
 
     private static final int NUM_OF_ITEMS = 100;
@@ -71,7 +74,10 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
     }
 
     protected void setDummyData(ListView listView, int num) {
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getDummyData(num)));
+        final ArrayList<Event> eventList=new EventHandler().getEvents();
+        EventAdapter adapter=new EventAdapter(this,-1,eventList);
+        listView.setAdapter(adapter);
+        //listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getDummyData(num)));
     }
 
     public static ArrayList<String> getDummyData(int num) {
@@ -107,9 +113,10 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
         listView.addHeaderView(paddingView);
         setDummyData(listView);
         mTitleView = (TextView) findViewById(R.id.title);
-        mTitleView.setText(getTitle());
-        setTitle(null);
+        //mTitleView.setText(getTitle());
+        //setTitle(null);
         mFab = findViewById(R.id.fab);
+        hideFab();
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,9 +178,9 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
         // Show/hide FAB
         if (fabTranslationY < mFlexibleSpaceShowFabOffset) {
             hideFab();
-        } else {
+        } /*else {
             showFab();
-        }
+        }*/
     }
 
     @Override

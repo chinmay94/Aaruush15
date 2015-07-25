@@ -28,5 +28,7 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.melnykov:floatingactionbutton:1.0.7'
     compile 'com.android.support:cardview-v7:22.0.0'
+    compile 'com.loopj.android:android-async-http:1.4.8'
+    compile 'com.getbase:floatingactionbutton:1.10.0'
     //compile 'com.yalantis:flipviewpager:1.0.0'
 }

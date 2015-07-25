@@ -1,5 +1,6 @@
 package webarch.aaruush15.ui_fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import webarch.aaruush15.FlexibleSpaceWithImageListViewActivity;
 import webarch.aaruush15.R;
 
 /**
@@ -23,8 +25,8 @@ public class FragmentDomains extends Fragment {
 
     GridView gv;
 
-    public static String[] DomainNames = {"MAGEFFICIE", "VIMANAZ", "MACHINATIONS", "ELECTRIZITE", "YUDDHAME", "FUNDAZ"};
-    public static int[] DomainImages = {R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz};
+    public static String[] DomainNames = {"MAGEFFICIE", "VIMANAZ", "MACHINATIONS", "ELECTRIZITE", "YUDDHAME", "FUNDAZ", "ARCHITECTURE", "ONLINE", "DIGITAL DESIGN", "PRESENTATIO", "KONSTRUCTION", "BLUEBOOK", "X-ZONE", "ROBOGYAN"};
+    public static int[] DomainImages = {R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz, R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz, R.drawable.bg_magefficie, R.drawable.bg_vimaz};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -36,7 +38,9 @@ public class FragmentDomains extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"Clicked on "+ DomainNames[i],Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), FlexibleSpaceWithImageListViewActivity.class);
+                startActivity(intent);
+                //Toast.makeText(getActivity(),"Clicked on "+ DomainNames[i],Toast.LENGTH_SHORT).show();
             }
         });
         return rootview;

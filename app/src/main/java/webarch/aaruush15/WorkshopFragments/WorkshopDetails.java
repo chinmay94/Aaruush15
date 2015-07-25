@@ -59,12 +59,10 @@ public class WorkshopDetails extends AppCompatActivity implements ObservableScro
 
         mImageView = (ImageView)findViewById(R.id.image);
         mImageView.setImageResource(extras.getInt("imageLarge"));
-        //mImageView = findViewById(R.id.image);
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
         mTitleView = (TextView) findViewById(R.id.title);
-        //mTitleView.setText(getTitle());
         mTitleView.setText(extras.getString("title"));
         setTitle(null);
         mFab = findViewById(R.id.fab);

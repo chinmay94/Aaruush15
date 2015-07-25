@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,22 +9,42 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
+        android:scaleType="fitXY"
+        android:src="@drawable/aaruushgrafitti"
         android:id="@+id/imageView" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:layout_height="0dp">
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab"
+        <TextView
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:id="@+id/text"
+            android:textSize="15sp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:text="@string/desc"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/right_labels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            fab:fab_addButtonColorNormal="@color/Primary"
+            fab:fab_addButtonColorPressed="@color/white_pressed"
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_addButtonSize="normal"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            fab:fab_labelsPosition="left"
             android:layout_margin="16dp"
-            android:scaleType="center"
-            app:fab_colorNormal="@color/Accent"
-            app:fab_colorPressed="@color/Accent" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
 </LinearLayout>

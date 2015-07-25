@@ -29,4 +29,9 @@
     <color name="green">#10b4a5</color>
     <color name="purple">#7c57e4</color>
     <color name="orange">#ff8c6a</color>
+
+
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="half_black">#808080</color>
+    <color name="white_pressed">#f1f1f1</color>
 </resources>
