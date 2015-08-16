@@ -72,7 +72,7 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
         setTitle(null);
         mFab = findViewById(R.id.fab);
         if(dbHandler.isFavourite(extras.getInt("id"))==1) {
-            mFab.setBackgroundColor(getResources().getColor(R.color.Primary));
+            mFab.setBackgroundResource(R.drawable.fav);
             mFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,6 +82,7 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
 
         }
         else if(dbHandler.isFavourite(extras.getInt("id"))==0) {
+            mFab.setBackgroundResource(R.drawable.nofav);
             mFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,7 +106,9 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
 
     public void addToFavourite(final int id, final View mFab)
     {
-        mFab.setBackgroundColor(getResources().getColor(R.color.Accent));
+        //mFab.setBackgroundColor(getResources().getColor(R.color.Accent));
+        mFab.setBackgroundResource(R.drawable.nofav);
+        //mFab.setActivated(false);
         Toast.makeText(EventDetails.this, "Removed from Favourites", Toast.LENGTH_SHORT).show();
         dbHandler.removeFavourite(id);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +120,9 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
     }
     public void removeFromFavourite(final int id,final View mFab)
     {
-        mFab.setBackgroundColor(getResources().getColor(R.color.Primary));
+        //mFab.setBackgroundColor(getResources().getColor(R.color.Primary));
+        mFab.setBackgroundResource(R.drawable.fav);
+        //mFab.setActivated(true);
         Toast.makeText(EventDetails.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
         dbHandler.setFavourite(id);
         mFab.setOnClickListener(new View.OnClickListener() {
