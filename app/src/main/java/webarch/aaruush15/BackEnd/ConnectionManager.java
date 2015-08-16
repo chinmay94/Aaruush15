@@ -64,6 +64,7 @@ public class ConnectionManager{
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.d("AARUUSH", "onSuccess");
+                Log.d("AARUUSHTEST",response.toString());
                 new RunThread().execute(response);
             }
 

@@ -65,6 +65,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         //sqLiteDatabase.execSQL(INSERT_DATA);
         setVersion(0);
 
+        //sqLiteDatabase.execSQL(INSERT_DATA);
+
     }
 
     @Override

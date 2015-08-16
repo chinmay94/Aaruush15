@@ -1,6 +1,8 @@
 package webarch.aaruush15.TeamFragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +40,25 @@ public class FragmentTeam extends Fragment {
         patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"Clicked on "+(Utils.patrons.get(i).getNickname()),Toast.LENGTH_SHORT).show();
+
+                String contact=(Utils.patrons.get(i).getInterests().get(2));
+                if(contact.contains("@"))
+                {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("plain/text");
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] { contact });
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+                    intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+                    startActivity(Intent.createChooser(intent, ""));
+                }
+                else
+                {
+                    String x = "tel:" + contact;
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.parse(x));
+                    startActivity(callIntent);
+                }
+                //Toast.makeText(getActivity(),"Clicked on "+(Utils.patrons.get(i).getNickname()),Toast.LENGTH_SHORT).show();
             }
         });
         /*patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {

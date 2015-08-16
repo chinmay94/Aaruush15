@@ -63,7 +63,7 @@ public class FragmentHome extends Fragment implements MaterialTabListener
     @Override
     public void onTabReselected(MaterialTab tab)
     {
-        //pager.setCurrentItem(tab.getPosition());
+        pager.setCurrentItem(tab.getPosition());
     }
 
     @Override
@@ -127,7 +127,9 @@ public class FragmentHome extends Fragment implements MaterialTabListener
 
         @Override
         protected void onPostExecute(Void result) {
-            if(adapter != null) pager.setAdapter(adapter);
+            if(adapter != null) {
+                pager.setAdapter(adapter);
+            }
         }
     }
 }
