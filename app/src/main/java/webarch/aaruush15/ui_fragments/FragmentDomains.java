@@ -47,7 +47,7 @@ public class FragmentDomains extends Fragment {
         return rootview;
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         inflater.inflate(R.menu.menu_main,menu);
@@ -64,5 +64,5 @@ public class FragmentDomains extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
