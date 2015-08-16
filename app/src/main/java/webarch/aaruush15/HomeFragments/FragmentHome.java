@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import webarch.aaruush15.R;
  */
 public class FragmentHome extends Fragment implements MaterialTabListener
 {
-
     MaterialTabHost tabHost;
     ViewPager pager;
     ViewPagerAdapter adapter;
@@ -38,7 +36,6 @@ public class FragmentHome extends Fragment implements MaterialTabListener
         tabHost.setPrimaryColor(this.getActivity().getResources().getColor(R.color.Primary));
         tabHost.setAccentColor(this.getActivity().getResources().getColor(R.color.PrimaryLight));
         pager = (ViewPager) rootview.findViewById(R.id.pager);
-
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         new SetAdapterTask().execute();
         pager.setAdapter(adapter);
@@ -50,7 +47,6 @@ public class FragmentHome extends Fragment implements MaterialTabListener
                 tabHost.setSelectedNavigationItem(position);
             }
         });
-
         for (int i = 0; i < adapter.getCount(); i++)
         {
             tabHost.addTab(tabHost.newTab().setText(adapter.getPageTitle(i)).setTabListener(this));
@@ -67,6 +63,7 @@ public class FragmentHome extends Fragment implements MaterialTabListener
     @Override
     public void onTabReselected(MaterialTab tab)
     {
+        //pager.setCurrentItem(tab.getPosition());
     }
 
     @Override

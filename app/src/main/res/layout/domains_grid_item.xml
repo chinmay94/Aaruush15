@@ -17,10 +17,12 @@
             android:src="@drawable/bg_electrizite"/>
         <TextView
             android:id="@+id/domain_name"
+            android:gravity="center"
+            android:background="#7d000000"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginBottom="25dp"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />

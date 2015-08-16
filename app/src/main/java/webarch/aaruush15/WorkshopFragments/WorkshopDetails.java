@@ -1,9 +1,11 @@
 package webarch.aaruush15.WorkshopFragments;
 
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,13 +20,17 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+import webarch.aaruush15.BackEnd.DOMParser;
+import webarch.aaruush15.BackEnd.DatabaseHandler;
 import webarch.aaruush15.R;
 
 public class WorkshopDetails extends AppCompatActivity implements ObservableScrollViewCallbacks {
 
     private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
+    DatabaseHandler dbHandler;
     private ImageView mImageView;
+    Context context;
     //private View mImageView;
     private View mOverlayView;
     private ObservableScrollView mScrollView;
@@ -51,27 +57,55 @@ public class WorkshopDetails extends AppCompatActivity implements ObservableScro
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workshopdetails);
-        Bundle extras=getIntent().getExtras();
+        final Bundle extras=getIntent().getExtras();
 
+        TextView tvDesc=(TextView)findViewById(R.id.textViewDesc);
+        TextView tvContact=(TextView)findViewById(R.id.textViewContact);
+
+        DOMParser dom=new DOMParser(extras.getString("desc"));
+        dom.ParseXML();
+        tvDesc.setText(dom.getDesc());
+        tvContact.setText(dom.getContact());
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = getActionBarSize();
-
+        dbHandler=new DatabaseHandler(this);
         mImageView = (ImageView)findViewById(R.id.image);
         mImageView.setImageResource(extras.getInt("imageLarge"));
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
         mTitleView = (TextView) findViewById(R.id.title);
-        mTitleView.setText(extras.getString("title"));
+        mTitleView.setText(extras.getString("name"));
+        context=this;
         setTitle(null);
         mFab = findViewById(R.id.fab);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(WorkshopDetails.this, "FAB is clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Log.d("AARUUSH",""+extras.getInt("id"));
+        if(dbHandler.isFavourite(extras.getInt("id"))==1) {
+            mFab.setBackgroundColor(getResources().getColor(R.color.Primary));
+            mFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(WorkshopDetails.this, "Removed from Favourites", Toast.LENGTH_SHORT).show();
+                    dbHandler.removeFavourite(extras.getInt("id"));
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+
+        }
+        else if(dbHandler.isFavourite(extras.getInt("id"))==0) {
+            mFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(WorkshopDetails.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
+                    dbHandler.setFavourite(extras.getInt("id"));
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+        }
+
         mFabMargin = getResources().getDimensionPixelSize(R.dimen.margin_standard);
         ViewHelper.setScaleX(mFab, 0);
         ViewHelper.setScaleY(mFab, 0);

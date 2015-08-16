@@ -89,7 +89,7 @@ public class FragmentTeam extends Fragment {
     class MemberModelAdapter extends BaseFlipAdapter<MemberModel>
     {
         private final int PAGES = 3;
-        private int[] IDS_INTEREST = {R.id.interest_1,R.id.interest_2};
+        private int[] IDS_INTEREST = {R.id.interest_1, R.id.interest_2};
         public MemberModelAdapter(Context context, List<MemberModel> items, FlipSettings settings)
         {
             super(context, items, settings);

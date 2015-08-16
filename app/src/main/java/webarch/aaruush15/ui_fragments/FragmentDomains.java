@@ -25,8 +25,8 @@ public class FragmentDomains extends Fragment {
 
     GridView gv;
 
-    public static String[] DomainNames = {"MAGEFFICIE", "VIMANAZ", "MACHINATIONS", "ELECTRIZITE", "YUDDHAME", "FUNDAZ", "ARCHITECTURE", "ONLINE", "DIGITAL DESIGN", "PRESENTATIO", "KONSTRUCTION", "BLUEBOOK", "X-ZONE", "ROBOGYAN"};
-    public static int[] DomainImages = {R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz, R.drawable.bg_magefficie, R.drawable.bg_vimaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yudhamme, R.drawable.bg_fundaz, R.drawable.bg_magefficie, R.drawable.bg_vimaz};
+    public static String[] DomainNames = {"MAGEFFICIE", "VIMANAZ", "MACHINATION", "ELECTRIZITE", "YUDDHAME", "FUNDAZ", "ARCHITECTURE", "ONLINE", "DIGITAL DESIGN", "PRAESENTATIO", "KONSTRUKTION", "BLUEBOOK", "X-ZONE", "ROBOGYAN"};
+    public static int[] DomainImages = {R.drawable.bg_magefficie, R.drawable.bg_vimanaz, R.drawable.bg_machinations, R.drawable.bg_electrizite, R.drawable.bg_yuddhame_l, R.drawable.bg_fundaz, R.drawable.bg_architecture_l, R.drawable.bg_online, R.drawable.bg_digital_design, R.drawable.bg_praesentatio, R.drawable.bg_konstruktion, R.drawable.bg_bluebook, R.drawable.bg_xzone, R.drawable.bg_robogyan};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -39,8 +39,9 @@ public class FragmentDomains extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent=new Intent(getActivity(), FlexibleSpaceWithImageListViewActivity.class);
-                startActivity(intent);
+                intent.putExtra("Domain",DomainNames[i]);
                 //Toast.makeText(getActivity(),"Clicked on "+ DomainNames[i],Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
         return rootview;

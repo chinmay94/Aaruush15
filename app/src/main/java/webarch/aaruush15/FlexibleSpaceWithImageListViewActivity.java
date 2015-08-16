@@ -17,15 +17,17 @@
 package webarch.aaruush15;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,14 +41,19 @@ import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import webarch.aaruush15.WorkshopFragments.Workshop;
-import webarch.aaruush15.WorkshopFragments.WorkshopHandler;
+import webarch.aaruush15.BackEnd.Data;
+import webarch.aaruush15.BackEnd.DatabaseHandler;
+import webarch.aaruush15.BackEnd.ListAdapter;
+import webarch.aaruush15.ui_fragments.EventDetails;
 
-public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
+public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity implements ObservableScrollViewCallbacks{
 
     private static final int NUM_OF_ITEMS = 100;
     private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
+    DatabaseHandler dbHandler;
+
 
     private View mImageView;
     private View mOverlayView;
@@ -58,6 +65,7 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
     private int mFlexibleSpaceImageHeight;
     private int mFabMargin;
     private boolean mFabIsShown;
+    String domain;
 
     protected int getActionBarSize() {
         TypedValue typedValue = new TypedValue();
@@ -69,14 +77,27 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
         return actionBarSize;
     }
 
-    protected void setDummyData(ListView listView) {
-        setDummyData(listView, NUM_OF_ITEMS);
-    }
-
-    protected void setDummyData(ListView listView, int num) {
-        final ArrayList<Event> eventList=new EventHandler().getEvents();
-        EventAdapter adapter=new EventAdapter(this,-1,eventList);
-        listView.setAdapter(adapter);
+    protected void setDummyData(ListView listView,String domain) {
+        final List<Data> eventList=dbHandler.getDatabyDomain(domain);
+        Log.d("AARUUSH","setDummyData");
+        if(eventList!=null){
+            Log.d("AARUUSH","test");
+            ListAdapter adapter=new ListAdapter(this,-1,eventList);
+            listView.setAdapter(adapter);}
+        Log.d("AARUUSH","setDummyData-2");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.image), "Test_Image");
+                Intent intent = new Intent(getBaseContext(), EventDetails.class);
+                //intent.putExtra("Test_Image",(String)view.getTag());
+                //intent.putExtra("position",i);
+                Bundle bundle = eventList.get(i - 1).getAsBundle();
+                intent.putExtras(bundle);
+                //ActivityCompat.startActivity(getActivity(),intent,options.toBundle());
+                startActivity(intent);
+            }
+        });
         //listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getDummyData(num)));
     }
 
@@ -98,9 +119,21 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
         mActionBarSize = getActionBarSize();
         mImageView = findViewById(R.id.image);
         mOverlayView = findViewById(R.id.overlay);
+        domain=getIntent().getStringExtra("Domain").trim().toLowerCase();
+        dbHandler=new DatabaseHandler(this);
         ObservableListView listView = (ObservableListView) findViewById(R.id.list);
         listView.setScrollViewCallbacks(this);
+        String imageurl;
+        if(domain.equals("digital design"))
+            imageurl="bg_digital_design_l";
+        else if(domain.equals("x-zone"))
+            imageurl="bg_xzone_l";
+        else
+            imageurl="bg_"+domain+"_l";
+        int resID = getResources().getIdentifier(imageurl , "drawable", getPackageName());
+        mImageView.setBackgroundResource(resID);
 
+        Log.d("AARUUSH", "ListView");
         // Set padding view for ListView. This is the flexible space.
         View paddingView = new View(this);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
@@ -111,7 +144,8 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
         paddingView.setClickable(true);
 
         listView.addHeaderView(paddingView);
-        setDummyData(listView);
+        setDummyData(listView,domain);
+
         mTitleView = (TextView) findViewById(R.id.title);
         //mTitleView.setText(getTitle());
         //setTitle(null);
@@ -129,6 +163,7 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
 
         // mListBackgroundView makes ListView's background except header view.
         mListBackgroundView = findViewById(R.id.list_background);
+
     }
 
     @Override
@@ -217,4 +252,5 @@ public class FlexibleSpaceWithImageListViewActivity extends AppCompatActivity im
             mFabIsShown = false;
         }
     }
+
 }
