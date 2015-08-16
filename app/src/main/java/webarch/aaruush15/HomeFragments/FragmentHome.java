@@ -38,7 +38,6 @@ public class FragmentHome extends Fragment implements MaterialTabListener
         pager = (ViewPager) rootview.findViewById(R.id.pager);
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         new SetAdapterTask().execute();
-        pager.setAdapter(adapter);
         pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
         {
             @Override
