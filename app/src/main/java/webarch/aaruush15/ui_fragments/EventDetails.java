@@ -76,10 +76,7 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
             mFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(EventDetails.this, "Removed from Favourites", Toast.LENGTH_SHORT).show();
-                    dbHandler.removeFavourite(extras.getInt("id"));
-                    finish();
-                    startActivity(getIntent());
+                    addToFavourite(extras.getInt("id"), mFab);
                 }
             });
 
@@ -88,10 +85,7 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
             mFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(EventDetails.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
-                    dbHandler.setFavourite(extras.getInt("id"));
-                    finish();
-                    startActivity(getIntent());
+                    removeFromFavourite(extras.getInt("id"),mFab);
                 }
             });
         }
@@ -109,6 +103,30 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
         });
     }
 
+    public void addToFavourite(final int id, final View mFab)
+    {
+        mFab.setBackgroundColor(getResources().getColor(R.color.Accent));
+        Toast.makeText(EventDetails.this, "Removed from Favourites", Toast.LENGTH_SHORT).show();
+        dbHandler.removeFavourite(id);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeFromFavourite(id,mFab);
+            }
+        });
+    }
+    public void removeFromFavourite(final int id,final View mFab)
+    {
+        mFab.setBackgroundColor(getResources().getColor(R.color.Primary));
+        Toast.makeText(EventDetails.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
+        dbHandler.setFavourite(id);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToFavourite(id, mFab);
+            }
+        });
+    }
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
         // Translate overlay and image
