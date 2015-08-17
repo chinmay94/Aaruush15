@@ -58,6 +58,7 @@ public class FragmentHomeHighlights extends Fragment implements SwipeRefreshLayo
         con=new ConnectionManager(getActivity(),swipeRefreshLayout,mainlist,null,type);
         list=dbHandler.getDatabyTypeFav(type);
         List<Data> EmptyList=new ArrayList<Data>();
+        //EmptyList.add(new Data("Nothing To Display","","","","","","<Description><Desc>Please add Something...</Desc></Description>","empty"));
         EmptyList.add(new Data("Nothing To Display","","","","","","Please add Something...","empty"));
         if(list!=null)
             mainlist.setAdapter(new ListAdapter(context,-1,list));

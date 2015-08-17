@@ -17,8 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +64,7 @@ public class FragmentHomeEvents extends Fragment implements SwipeRefreshLayout.O
         list=dbHandler.getDatabyTypeFav(type);
 
         List<Data> EmptyList=new ArrayList<Data>();
+        //EmptyList.add(new Data("Nothing To Display","","","","","","<Description><Desc>Please add Something...</Desc></Description>","empty"));
         EmptyList.add(new Data("Nothing To Display","","","","","","Please add Something...","empty"));
         Log.d("AARUUSH", "onCreateView");
         if(list!=null)
@@ -70,11 +75,12 @@ public class FragmentHomeEvents extends Fragment implements SwipeRefreshLayout.O
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView title = (TextView) view.findViewById(R.id.title);
-                if (!title.getText().equals("Nothing To Display")){
+                if (!title.getText().equals("Nothing To Display")) {
                     Intent intent = new Intent(getActivity(), EventDetails.class);
                     Bundle bundle = list.get(i).getAsBundle();
                     intent.putExtras(bundle);
-                    startActivity(intent);}
+                    startActivity(intent);
+                }
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -110,6 +116,26 @@ public class FragmentHomeEvents extends Fragment implements SwipeRefreshLayout.O
         {
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(context, "Please Connect To The Internet", Toast.LENGTH_SHORT).show();
+            try {
+                rnrStatic();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void rnrStatic()throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(getActivity().getAssets().open("staticdata.txt")));
+        String readLine = null;
+        String data="";
+        while ((readLine = br.readLine()) != null)
+            data+=readLine;
+        try {
+            JSONArray response=new JSONArray(data);
+            con.forceRead(response);
+        } catch (JSONException e) {
+            Log.d("MA KI ANKH","problem with starting force read");
+            e.printStackTrace();
         }
     }
 }

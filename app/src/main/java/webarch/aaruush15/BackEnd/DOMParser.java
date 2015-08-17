@@ -16,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class DOMParser {
     String Desc;
-    String Detail="",Cost="",Contact="";
+    String Detail="",Cost="",Contact="",Criteria="";
     Document doc = null;
     public DOMParser(String Desc){
         this.Desc=Desc;
@@ -51,5 +51,9 @@ public class DOMParser {
     public String getContact()
     {
        return doc.getElementsByTagName("Contact").item(0).getTextContent().trim();
+    }
+    public String getCrit()
+    {
+        return doc.getElementsByTagName("Criteria").item(0).getTextContent().trim();
     }
 }

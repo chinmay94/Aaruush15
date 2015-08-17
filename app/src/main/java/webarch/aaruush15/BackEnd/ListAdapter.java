@@ -1,6 +1,7 @@
 package webarch.aaruush15.BackEnd;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ListAdapter extends ArrayAdapter<Data> {
         if(current.getType().equals("2"))
         {
             DOMParser dom=new DOMParser(current.getDesc());
+            Log.d("AARUUSHTEST",current.getDesc());
             dom.ParseXML();
             if(dom.getDesc().length()>=100)
                 desc.setText(dom.getDesc().substring(0,100)+".....");
@@ -45,10 +47,19 @@ public class ListAdapter extends ArrayAdapter<Data> {
                 desc.setText(dom.getDesc());
         }
         else {
-            if (current.getDesc().length() >= 100)
-                desc.setText(current.getDesc().substring(0, 100) + ".....");
+            /*DOMParser dom=new DOMParser(current.getDesc());
+            Log.d("AARUUSHTEST",current.getDesc());
+            dom.ParseXML();
+            if(dom.getDesc().length()>=100)
+                desc.setText(dom.getDesc().substring(0,100)+".....");
             else
-                desc.setText(current.getDesc());
+                desc.setText(dom.getDesc());*/
+            String x=current.getDesc();
+            x=x.replace("<Description><Desc>","");
+            if (x.length() >= 100)
+                desc.setText(x.substring(0, 100) + "...");
+            else
+                desc.setText(x);
         }
         int resID = context.getResources().getIdentifier(current.getImage() , "drawable", context.getPackageName());
         image.setImageResource(resID);

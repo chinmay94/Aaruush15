@@ -59,7 +59,7 @@ public class FragmentHomeWorkshops extends Fragment implements SwipeRefreshLayou
         list=dbHandler.getDatabyTypeFav(type);
 
         List<Data> EmptyList=new ArrayList<Data>();
-        EmptyList.add(new Data("Nothing To Display","","","","","","Please add Something...","empty"));
+        EmptyList.add(new Data("Nothing To Display","","","","","","<Description><Desc>Please add Something...</Desc></Description>","empty"));
         if(list!=null)
             mainlist.setAdapter(new ListAdapter(context,-1,list));
         else

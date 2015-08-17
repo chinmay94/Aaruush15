@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:padding="5sp"
-        android:dividerHeight="15dp"
+        android:dividerHeight="10dp"
         android:divider="@null"
         android:layout_gravity="center_horizontal" />
     </android.support.v4.widget.SwipeRefreshLayout>

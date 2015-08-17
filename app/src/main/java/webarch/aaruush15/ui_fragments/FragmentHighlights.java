@@ -29,17 +29,19 @@ import webarch.aaruush15.WorkshopFragments.WorkshopDetails;
 /**
  * Created by Chinmay on 07-Jul-15.
  */
-public class FragmentHighlights extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+//public class FragmentHighlights extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentHighlights extends Fragment{
 
-    DatabaseHandler dbHandler;
+    /*DatabaseHandler dbHandler;
     ListView list;
     SwipeRefreshLayout swipeRefreshLayout;
     ConnectionManager con;
-    Context context;
+    Context context;*/
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootview=inflater.inflate(R.layout.fragment_highlights,container,false);
-        list=(ListView)rootview.findViewById(R.id.listView);
+        //View rootview=inflater.inflate(R.layout.fragment_highlights,container,false);
+        View rootview=inflater.inflate(R.layout.comingsoon,container,false);
+        /*list=(ListView)rootview.findViewById(R.id.listView);
         dbHandler=new DatabaseHandler(getActivity());
         swipeRefreshLayout=(SwipeRefreshLayout)rootview.findViewById(R.id.swipe_refresh_layout);
         con=new ConnectionManager(getActivity(),swipeRefreshLayout,list,"3",null);
@@ -64,10 +66,10 @@ public class FragmentHighlights extends Fragment implements SwipeRefreshLayout.O
             public void run() {
                 onRun();
             }
-        });
+        });*/
         return rootview;
     }
-    public void onRefresh() {
+    /*public void onRefresh() {
         onRun();
     }
     public void onRun(){
@@ -90,5 +92,5 @@ public class FragmentHighlights extends Fragment implements SwipeRefreshLayout.O
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(context, "Please Connect To The Internet", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }

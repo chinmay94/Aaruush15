@@ -19,6 +19,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+import webarch.aaruush15.BackEnd.DOMParser;
 import webarch.aaruush15.BackEnd.DatabaseHandler;
 import webarch.aaruush15.R;
 
@@ -62,7 +63,8 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
         mActionBarSize = getActionBarSize();
         dbHandler=new DatabaseHandler(this);
         mImageView = (ImageView)findViewById(R.id.image);
-        mImageView.setImageResource(extras.getInt("imageLarge"));
+        //mImageView.setImageResource(extras.getInt("imageLarge"));
+
         mOverlayView = findViewById(R.id.overlay);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
         mScrollView.setScrollViewCallbacks(this);
@@ -90,8 +92,29 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
                 }
             });
         }
-        TextView tvDesc=(TextView)findViewById(R.id.desc);
-        tvDesc.setText(extras.getString("desc"));
+
+        String domain=extras.getString("domain");
+        Log.d("AARUUSHDOMAIN",domain);
+        String imageurl;
+        if(domain.equals("digital design"))
+            imageurl="bg_digital_design_l";
+        else if(domain.equals("x-zone"))
+            imageurl="bg_xzone_l";
+        else
+            imageurl="bg_"+domain+"_l";
+        int resID = getResources().getIdentifier(imageurl , "drawable", getPackageName());
+        mImageView.setBackgroundResource(resID);
+
+        TextView tvDesc=(TextView)findViewById(R.id.textViewDesc);
+        TextView tvContact=(TextView)findViewById(R.id.textViewContact);
+
+        //tvDesc.setText(extras.getString("desc"));
+
+        DOMParser dom=new DOMParser(extras.getString("desc"));
+        dom.ParseXML();
+        tvDesc.setText(dom.getDesc());
+        tvContact.setText(dom.getContact());
+
         mFabMargin = getResources().getDimensionPixelSize(R.dimen.margin_standard);
         ViewHelper.setScaleX(mFab, 0);
         ViewHelper.setScaleY(mFab, 0);
@@ -99,6 +122,7 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
             @Override
             public void run() {
                 mScrollView.scrollTo(0, 1);
+                //mScrollView.scrollTo(0, mFlexibleSpaceImageHeight - mActionBarSize);
                 //mFlexibleSpaceImageHeight - mActionBarSize
             }
         });

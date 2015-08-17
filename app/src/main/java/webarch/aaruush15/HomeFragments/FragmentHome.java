@@ -85,8 +85,8 @@ public class FragmentHome extends Fragment implements MaterialTabListener
                     return new FragmentHomeEvents();
                 case 1:
                     return new FragmentHomeWorkshops();
-                case 2:
-                    return new FragmentHomeHighlights();
+                /*case 2:
+                    return new FragmentHomeHighlights();*/
             }
             return new FragmentHomeEvents();
         }
@@ -94,7 +94,8 @@ public class FragmentHome extends Fragment implements MaterialTabListener
         @Override
         public int getCount()
         {
-            return 3;
+            //return 3;
+            return 2;
         }
 
         @Override
@@ -106,8 +107,8 @@ public class FragmentHome extends Fragment implements MaterialTabListener
                     return "Events";
                 case 1:
                     return "Workshops";
-                case 2:
-                    return "Highlights";
+                /*case 2:
+                    return "Highlights";*/
             }
             return "Error";
         }

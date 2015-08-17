@@ -16,7 +16,8 @@ public class FragmentSponsors extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootview=inflater.inflate(R.layout.fragment_sponsors,container,false);
+        //View rootview=inflater.inflate(R.layout.fragment_sponsors,container,false);
+        View rootview=inflater.inflate(R.layout.comingsoon,container,false);
         return rootview;
     }
 }

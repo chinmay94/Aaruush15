@@ -78,6 +78,12 @@ public class ConnectionManager{
 
 
     }
+    public void forceRead(JSONArray response)
+    {
+        Log.d("AARUUSH", "onForce");
+        Log.d("AARUUSHTEST",response.toString());
+        new RunThread().execute(response);
+    }
     private class RunThread extends AsyncTask<JSONArray, Void,Void> {
         @Override
         protected Void doInBackground(JSONArray... jsonArrays) {
