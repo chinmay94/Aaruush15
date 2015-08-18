@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,18 +40,15 @@ public class FragmentTeam extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                String contact=(Utils.patrons.get(i).getInterests().get(2));
-                if(contact.contains("@"))
-                {
+                String contact = (Utils.patrons.get(i).getInterests().get(2));
+                if (contact.contains("@")) {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("plain/text");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] { contact });
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{contact});
                     intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
                     intent.putExtra(Intent.EXTRA_TEXT, "mail body");
                     startActivity(Intent.createChooser(intent, ""));
-                }
-                else
-                {
+                } else {
                     String x = "tel:" + contact;
                     Intent callIntent = new Intent(Intent.ACTION_DIAL);
                     callIntent.setData(Uri.parse(x));
@@ -61,48 +57,6 @@ public class FragmentTeam extends Fragment {
                 //Toast.makeText(getActivity(),"Clicked on "+(Utils.patrons.get(i).getNickname()),Toast.LENGTH_SHORT).show();
             }
         });
-        /*patrons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-
-                // set title
-                alertDialogBuilder.setTitle("Hello");
-
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("Choose your option ")
-                        .setCancelable(false)
-                        .setPositiveButton("Facebook", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // if this button is clicked, close
-                                // current activity
-                                disp();
-                            }
-                            public void disp() {
-                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                                        "https://www.facebook.com/chinmay.kapoor.9"));
-                                startActivity(browserIntent);
-                            }
-                        })
-                        .setNegativeButton("Call", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                String x = "tel:9314871195";
-                                Intent calli = new Intent(Intent.ACTION_DIAL);
-                                calli.setData((Uri.parse(x)));
-                                startActivity(calli);
-                            }
-                        });
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                // show it
-                alertDialog.show();
-                alertDialog.setCanceledOnTouchOutside(true);
-                alertDialog.setCancelable(true);
-            }
-        });*/
         return rootview;
     }
 
@@ -123,6 +77,8 @@ public class FragmentTeam extends Fragment {
             {
                 holder = new MembersHolder();
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.team_item_normal, parent, false);
+                holder.leftName=(TextView) convertView.findViewById(R.id.post1);
+                holder.RightName=(TextView) convertView.findViewById(R.id.post2);
                 holder.leftAvatar = (ImageView) convertView.findViewById(R.id.first);
                 holder.rightAvatar = (ImageView) convertView.findViewById(R.id.second);
                 holder.infoPage = getActivity().getLayoutInflater().inflate(R.layout.team_item_flipped, parent, false);
@@ -140,8 +96,11 @@ public class FragmentTeam extends Fragment {
             {
                 case 1:
                     holder.leftAvatar.setImageResource(model1.getAvatar());
-                    if (model2 != null)
+                    holder.leftName.setText(model1.getInterests().get(0));
+                    if (model2 != null) {
                         holder.rightAvatar.setImageResource(model2.getAvatar());
+                        holder.RightName.setText(model2.getInterests().get(0));
+                    }
                     break;
                 default:
                     fillHolder(holder, position == 0 ? model1 : model2);
@@ -173,6 +132,8 @@ public class FragmentTeam extends Fragment {
         {
             ImageView leftAvatar;
             ImageView rightAvatar;
+            TextView leftName;
+            TextView RightName;
             View infoPage;
             List<TextView> interests = new ArrayList<>();
             TextView nickName;

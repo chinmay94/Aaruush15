@@ -12,11 +12,6 @@ public class Utils {
     public static final List<MemberModel> patrons = new ArrayList<>();
 
     static {
-        patrons.add(new MemberModel(R.drawable.director, "Dr C. Muthamizhchelval", R.color.sienna, "Director E & T","Patron","director.et@srmuniv.ac.in"));
-        patrons.add(new MemberModel(R.drawable.convenor, "Prof. A. Rathanam", R.color.saffron, "Convenor - Aaruush","Patron","convenor@aaruush.net"));
-        patrons.add(new MemberModel(R.drawable.fa, "Prof. V. Ponniah", R.color.green, "Finance Advisor - Aaruush","Patron","advisor.finance@aaruush.net"));
-        patrons.add(new MemberModel(R.drawable.eo, "Mr. V. Thirumurugan", R.color.pink, "Estate Officer","Patron","estate.officer@srmuniv.ac.in"));
-
         patrons.add(new MemberModel(R.drawable.krishna, "Krishna Choubisa", R.color.purple, "Joint Secretary","Core Team","9445898504"));
         patrons.add(new MemberModel(R.drawable.saiteja, "Kukkadapu Saiteja", R.color.orange, "ORM","Core Team","9677229744"));
         patrons.add(new MemberModel(R.drawable.vishnu, "Naga Vishnu Vallabha Sanka", R.color.sienna, "ORM","Core Team","9940340209"));

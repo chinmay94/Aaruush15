@@ -191,9 +191,9 @@ public class MaterialAccount {
 
     public interface OnAccountDataLoaded {
 
-        public void onUserPhotoLoaded(MaterialAccount account);
+        void onUserPhotoLoaded(MaterialAccount account);
 
-        public void onBackgroundLoaded(MaterialAccount account);
+        void onBackgroundLoaded(MaterialAccount account);
     }
 
     // asynctasks

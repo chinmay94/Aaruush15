@@ -1279,10 +1279,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     private boolean deviceSupportMultiPane() {
-        if(multiPaneSupport && resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Utils.isTablet(resources))
-            return true;
-        else
-            return false;
+        return multiPaneSupport && resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Utils.isTablet(resources);
     }
 
     private void setDrawerTouchable(boolean isTouchable) {

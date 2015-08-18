@@ -96,12 +96,13 @@ public class EventDetails extends AppCompatActivity implements ObservableScrollV
         String domain=extras.getString("domain");
         Log.d("AARUUSHDOMAIN",domain);
         String imageurl;
-        if(domain.equals("digital design"))
+        /*if(domain.equals("digital design"))
             imageurl="bg_digital_design_l";
         else if(domain.equals("x-zone"))
             imageurl="bg_xzone_l";
         else
-            imageurl="bg_"+domain+"_l";
+            imageurl="bg_"+domain+"_l";*/
+        imageurl=extras.getString("image")+"_l";
         int resID = getResources().getIdentifier(imageurl , "drawable", getPackageName());
         mImageView.setBackgroundResource(resID);
 

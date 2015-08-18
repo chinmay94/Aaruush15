@@ -7,8 +7,8 @@ import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
  */
 public interface MaterialAccountListener {
 
-    public void onAccountOpening(MaterialAccount account);
+    void onAccountOpening(MaterialAccount account);
 
-    public void onChangeAccount(MaterialAccount newAccount);
+    void onChangeAccount(MaterialAccount newAccount);
 
 }

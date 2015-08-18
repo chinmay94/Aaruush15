@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import webarch.aaruush15.TeamFragments.FragmentPatrons;
 import webarch.aaruush15.TeamFragments.FragmentTeam;
 import webarch.aaruush15.ui_fragments.FragmentAbout;
 import webarch.aaruush15.ui_fragments.FragmentCredits;
@@ -41,12 +42,13 @@ public class MainActivity extends MaterialNavigationDrawer
     {
         View drawerHeaderView = LayoutInflater.from(this).inflate(R.layout.custom_drawer,null);
         setDrawerHeaderCustom(drawerHeaderView);
-        this.addSection(newSectionWithRealColor("Home", R.drawable.drawer_home, new FragmentHome()));
         this.addSection(newSectionWithRealColor("About", R.drawable.drawer_about, new FragmentAbout()));
         this.addSection(newSectionWithRealColor("Domains", R.drawable.drawer_domains, new FragmentDomains()));
         this.addSection(newSectionWithRealColor("Workshops", R.drawable.drawer_workshops, new FragmentWorkshops()));
+        this.addSection(newSectionWithRealColor("Favourites", R.drawable.drawer_fav, new FragmentHome()));
         this.addSection(newSectionWithRealColor("Highlights", R.drawable.drawer_highlights, new FragmentHighlights()));
         this.addSection(newSectionWithRealColor("Sponsors", R.drawable.drawer_sponsors, new FragmentSponsors()));
+        this.addSection(newSectionWithRealColor("Patrons", R.drawable.drawer_patrons, new FragmentPatrons()));
         this.addSection(newSectionWithRealColor("Team", R.drawable.drawer_team, new FragmentTeam()));
         this.addBottomSection(newSectionWithRealColor("Credits", R.drawable.drawer_credits, new FragmentCredits()));
 

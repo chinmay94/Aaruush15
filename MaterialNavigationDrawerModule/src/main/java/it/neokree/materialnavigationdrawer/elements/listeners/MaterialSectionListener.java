@@ -7,5 +7,5 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
  */
 public interface MaterialSectionListener {
 
-    public void onClick(MaterialSection section);
+    void onClick(MaterialSection section);
 }
