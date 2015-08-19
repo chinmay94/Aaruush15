@@ -118,14 +118,14 @@ public class FragmentHomeEvents extends Fragment implements SwipeRefreshLayout.O
         {
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(context, "Please Connect To The Internet", Toast.LENGTH_SHORT).show();
-            try {
+            /*try {
                 rnrStatic();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
-    public void rnrStatic()throws IOException
+    /*public void rnrStatic()throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(getActivity().getAssets().open("staticdata.txt")));
         String readLine = null;
@@ -139,5 +139,5 @@ public class FragmentHomeEvents extends Fragment implements SwipeRefreshLayout.O
             Log.d("MA KI ANKH","problem with starting force read");
             e.printStackTrace();
         }
-    }
+    }*/
 }

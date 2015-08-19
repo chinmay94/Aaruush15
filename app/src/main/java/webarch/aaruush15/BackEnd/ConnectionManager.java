@@ -138,13 +138,20 @@ public class ConnectionManager{
             super.onPostExecute(aVoid);
             List<Data> list;
 
-            if(type!=null){
-                if((Integer.parseInt(type)==1)||(Integer.parseInt(type)==2)||(Integer.parseInt(type)==3))
-                    list=dbHandler.getDatabyType(type);
+            if(type!=null) {
+                if (type.equals("-1"))
+                {
+                }
                 else
-                    list=dbHandler.getDatabyDomain(type);
-                if(list!=null)
-                    listView.setAdapter(new ListAdapter(context,-1,list));}
+                {
+                    if ((Integer.parseInt(type) == 1) || (Integer.parseInt(type) == 2) || (Integer.parseInt(type) == 3))
+                        list = dbHandler.getDatabyType(type);
+                    else
+                        list = dbHandler.getDatabyDomain(type);
+                    if (list != null)
+                        listView.setAdapter(new ListAdapter(context, -1, list));
+                }
+            }
             else{
                 list=dbHandler.getDatabyTypeFav(fav);
                 List<Data> EmptyList=new ArrayList<Data>();

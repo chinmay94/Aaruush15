@@ -59,7 +59,7 @@ public class FragmentHomeWorkshops extends Fragment implements SwipeRefreshLayou
         list=dbHandler.getDatabyTypeFav(type);
 
         List<Data> EmptyList=new ArrayList<Data>();
-        EmptyList.add(new Data("No favourite added yet","","","","","","<Description><Desc>Tap on star icon in any workshop to add it as a favourite...</Desc></Description>","empty"));
+        EmptyList.add(new Data("No favourite added yet","","","","","","Tap on star icon in any workshop to add it as a favourite...","empty"));
         if(list!=null)
             mainlist.setAdapter(new ListAdapter(context,-1,list));
         else

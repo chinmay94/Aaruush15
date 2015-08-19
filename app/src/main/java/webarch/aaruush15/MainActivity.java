@@ -42,7 +42,7 @@ public class MainActivity extends MaterialNavigationDrawer
     {
         View drawerHeaderView = LayoutInflater.from(this).inflate(R.layout.custom_drawer,null);
         setDrawerHeaderCustom(drawerHeaderView);
-        this.addSection(newSectionWithRealColor("About", R.drawable.drawer_about, new FragmentAbout()));
+        this.addSection(newSectionWithRealColor("Home", R.drawable.drawer_about, new FragmentAbout()));
         this.addSection(newSectionWithRealColor("Domains", R.drawable.drawer_domains, new FragmentDomains()));
         this.addSection(newSectionWithRealColor("Workshops", R.drawable.drawer_workshops, new FragmentWorkshops()));
         this.addSection(newSectionWithRealColor("Favourites", R.drawable.drawer_fav, new FragmentHome()));
